@@ -130,9 +130,12 @@
 	    	        loop: false,
 	    	    });
 		    })
+			console.log('this.infor', this.infor)
 			this.chatname=this.infor.remarks ? this.infor.remarks : this.infor.petname;
 			this.getUserInfo();
+
 			this.userInfoData=this.userInfo
+			console.log('this.userInfoData', this.userInfoData)
 			userWord().then((res) => {
 				//this.conversine=[...res]
 			});	

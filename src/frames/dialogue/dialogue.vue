@@ -97,6 +97,7 @@
 	import {imgurl} from 'src/config/env';
 	import {mapState,mapActions,mapMutations} from 'vuex'
 	import {groupChat, userInfo, login, dialog} from 'src/service/getData'
+	import { contacts } from 'src/service/data/contacts'
 	import fetch from 'src/config/fetch'
 
 	export default{
@@ -153,11 +154,28 @@
 				"SAVE_MESSAGE","LOGIN_COVER" ,'GET_USERINFO'
 			]),
 			async initData(){
+				// var arr = [] 
+				// for(var key in contacts){
+				// 	arr.push(contacts[key])
+				// }
+				// var newArr = arr.reduce((a, b) => {
+				// 	return a.concat(b)
+				// })
+				// var str = '贺萧'
+				// for(var i = 0; i < newArr.length; i++){
+				// 	if(newArr[i].petname == str){
+				// 		localStorage.setItem('user_id', newArr[i].wxid)
+				// 	}
+				// }
+				
 				try{
+					
 					const user_id = localStorage.getItem('user_id')
 					const res = await userInfo(user_id)
+					console.log('iniData:res:', res)
 					if (res.status !== 200) {
 						this.LOGIN_COVER(true)
+						console.log('this.LOGIN_COVER(true)', this.LOGIN_COVER(true))
 					}else{
 						this.GET_USERINFO(res.user_info)
 					}
@@ -197,6 +215,7 @@
             		this.consumer=true;
             		try{
 						const res = await login({username: this.inputaccounts})
+						console.log('login', res)
 						if (res.status == 200) {
 							localStorage.setItem('user_id', res.user_info.id.toString())
 							this.GET_USERINFO(res.user_info)

@@ -157,6 +157,7 @@
 		mounted(){
 
 			this.getUserInfo();
+			console.log('this.getUserInfo' ,this.getUserInfo())
 			this.groupList(this.offset);
 			this.loadStatus=true;
 			groupChat().then((res) => {
@@ -166,11 +167,14 @@
 				if (!data) {
 					return
 				};
+				console.log('groupchat', data)
 				this.groupconversine.push(data);
 				this.$nextTick(()=>{
 					window.scrollTo(0,this.$refs.groupHeight.offsetHeight-window.innerHeight)
 				})
+				console.log('this.groupconversine', this.groupconversine)
 			});
+			//拿到相册、收藏之类
 			chatData().then((res) => {
 				this.chatData=res;
 			}).then(()=>{
@@ -287,6 +291,7 @@
 				this.clickmore=false;
 			},
 			async clickSend(){
+				console.log('this.userInfo', this.userInfo)
 				socket.emit('chat', {user_id: this.userInfo.id, content: this.inputmessage});
 				this.inputmessage='';
 				this.light=false;
